@@ -3,6 +3,7 @@ package com.mytasks.tasks.controllers;
 import com.mytasks.tasks.dto.TaskDto;
 import com.mytasks.tasks.models.Task;
 import com.mytasks.tasks.services.TaskServices;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class TaskRestController {
     }
 
     @PostMapping
-    public String createNewTask(@RequestBody TaskDto taskDto){
+    public ResponseEntity<Task> createNewTask(@RequestBody TaskDto taskDto){
         return taskServices.createTask(taskDto);
     }
 }

@@ -7,6 +7,7 @@ import com.mytasks.tasks.utility.TaskStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,13 +28,13 @@ public class TaskServices {
         this.taskRepository = taskRepository;
     }
 
-    public String createTask(TaskDto taskDto){
+    public ResponseEntity<Task> createTask(TaskDto taskDto){
         Task task = context.getBean(Task.class);
         task.setName(taskDto.getName());
         task.setDescription(taskDto.getDescription());
         task.setStatus(TaskStatus.TODO);
         Task savedTask = taskRepository.save(task);
-        return "Task Created id: "+savedTask.getId();
+        return ResponseEntity.ok(savedTask);
     }
 
     public Task findTaskById(long id){
